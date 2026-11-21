@@ -1,0 +1,215 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ====== PALET WARNA ASLI ====== */
+:root {
+  --bg: #101114;
+  --surface: #191b20;
+  --surface2: #202228;
+  --line: #30333b;
+  --text: #eeeef1;
+  --muted: #a0a4af;
+  --accent: #818cf8;
+  --success: #67ba91;
+  --warning: #dfad67;
+}
+
+body.light {
+  --bg: #f5f6f8;
+  --surface: #ffffff;
+  --surface2: #eceef3;
+  --line: #d9dce3;
+  --text: #21242c;
+  --muted: #606776;
+  --accent: #4958c8;
+  --success: #23825a;
+  --warning: #92611f;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'DM Sans', sans-serif;
+}
+
+button,
+input,
+textarea {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* ====== UTILITAS WARNA ====== */
+.muted { color: var(--muted); }
+.accent { color: var(--accent); }
+.good { color: var(--success); }
+.warn { color: var(--warning); }
+.surface { background: var(--surface); border: 1px solid var(--line); }
+.surface2 { background: var(--surface2); }
+.line { border-color: var(--line); }
+
+/* ====== TYPOGRAPHY ====== */
+.mono, code, pre { font-family: 'Space Mono', monospace; }
+.text-smx { font-size: 13px; }
+.section-title { font-size: 17px; font-weight: 700; letter-spacing: -0.025em; }
+.page-title { font-size: 27px; font-weight: 700; letter-spacing: -0.04em; }
+.eyebrow {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  font-weight: 700;
+  color: var(--accent);
+}
+
+/* ====== TOMBOL ====== */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  border: 1px solid var(--line);
+  border-radius: 9px;
+  padding: 9px 13px;
+  background: var(--surface2);
+  color: var(--text);
+  font-weight: 600;
+  transition: filter 0.18s, transform 0.18s;
+  text-decoration: none;
+  font-size: 14px;
+}
+.btn:hover { filter: brightness(1.15); }
+.btn:active { transform: scale(0.98); }
+.btn.primary { background: #6875e8; border-color: #6875e8; color: #fff; }
+.btn.small { padding: 6px 10px; font-size: 12px; }
+
+/* ====== FORM ====== */
+.field {
+  width: 100%;
+  padding: 10px 12px;
+  background: var(--surface2);
+  color: var(--text);
+  border: 1px solid var(--line);
+  border-radius: 9px;
+}
+.field:focus {
+  outline: 2px solid var(--accent);
+  outline-offset: 1px;
+}
+
+/* ====== KARTU ====== */
+.card {
+  border: 1px solid var(--line);
+  background: var(--surface);
+  border-radius: 12px;
+  padding: 20px;
+}
+
+/* ====== CHIP ====== */
+.chip {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  padding: 4px 8px;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  color: var(--muted);
+}
+
+/* ====== PROGRESS BAR ====== */
+.bar {
+  height: 6px;
+  border-radius: 20px;
+  background: var(--surface2);
+  overflow: hidden;
+}
+.bar > i {
+  display: block;
+  height: 100%;
+  background: var(--accent);
+  border-radius: inherit;
+  transition: width 0.25s;
+}
+
+/* ====== NAV SIDEBAR ====== */
+.nav-btn {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-align: left;
+  padding: 9px 11px;
+  color: var(--muted);
+  border: 0;
+  background: transparent;
+  border-radius: 8px;
+  font-size: 13px;
+  text-decoration: none;
+}
+.nav-btn:hover,
+.nav-btn.active {
+  color: var(--text);
+  background: var(--surface2);
+}
+.nav-btn.active {
+  box-shadow: inset 2px 0 var(--accent);
+}
+
+/* ====== KODE ====== */
+.code-preview {
+  background: #111318;
+  color: #c6d3f4;
+  padding: 19px;
+  border-radius: 10px;
+  overflow: auto;
+  font: 12px/1.8 'Space Mono', monospace;
+  white-space: pre-wrap;
+}
+
+.console {
+  min-height: 115px;
+  max-height: 210px;
+  overflow: auto;
+  background: #111318;
+  color: #cad2de;
+  padding: 14px;
+  font: 12px/1.7 'Space Mono', monospace;
+  white-space: pre-wrap;
+}
+
+/* ====== LAINNYA ====== */
+.list-row {
+  padding: 13px 0;
+  border-bottom: 1px solid var(--line);
+}
+.list-row:last-child { border: 0; }
+
+input[type='checkbox'],
+input[type='radio'] {
+  accent-color: var(--accent);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
