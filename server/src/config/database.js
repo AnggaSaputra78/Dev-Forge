@@ -1,21 +1,32 @@
 import mongoose from 'mongoose';
 
+// Cache koneksi di global agar dipakai ulang antar-invocation serverless
+let cached = global.mongooseCache;
+if (!cached) {
+  cached = global.mongooseCache = { conn: null, promise: null };
+}
+
 const connectDB = async () => {
-  try {
-    const conn = await mongoose.connect(process.env.MONGODB_URI);
-    console.log(`✅ MongoDB terhubung: ${conn.connection.host}`);
+  if (cached.conn) return cached.conn;
 
-    mongoose.connection.on('error', (err) => {
-      console.error('❌ Error koneksi MongoDB:', err);
+  if (!cached.promise) {
+    cached.promise = mongoose.connect(process.env.MONGODB_URI, {
+      bufferCommands: false,
+      maxPoolSize: 5,
+      serverSelectionTimeoutMS: 8000,
     });
-
-    mongoose.connection.on('disconnected', () => {
-      console.warn('⚠️ Koneksi MongoDB terputus');
-    });
-  } catch (error) {
-    console.error('❌ Gagal menghubungkan ke MongoDB:', error.message);
-    process.exit(1);
   }
+
+  try {
+    cached.conn = await cached.promise;
+    console.log('✅ MongoDB terhubung:', cached.conn.connection.host);
+  } catch (err) {
+    cached.promise = null;
+    console.error('❌ Gagal koneksi MongoDB:', err.message);
+    throw err;
+  }
+
+  return cached.conn;
 };
 
 export default connectDB;

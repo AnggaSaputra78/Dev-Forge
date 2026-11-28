@@ -2,6 +2,7 @@
   "name": "devforge-academy",
   "version": "1.0.0",
   "private": true,
+  "type": "module",
   "workspaces": ["client", "server"],
   "scripts": {
     "install:all": "npm install && cd client && npm install && cd ../server && npm install",
@@ -9,8 +10,7 @@
     "server": "cd server && npm run dev",
     "client": "cd client && npm run dev",
     "build": "cd client && npm run build",
-    "seed": "cd server && node src/scripts/seed.js",
-    "seed:reset": "cd server && node src/scripts/seed.js --reset"
+    "seed": "cd server && node src/scripts/seed.js"
   },
   "devDependencies": { "concurrently": "^8.2.2" }
 }

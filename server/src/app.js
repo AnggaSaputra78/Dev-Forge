@@ -30,7 +30,18 @@ const app = express();
 app.use(helmet({ contentSecurityPolicy: false }));
 
 app.use(cors({
-  origin: [process.env.CLIENT_URL, 'http://localhost:5173'].filter(Boolean),
+  origin: (origin, callback) => {
+    // Izinkan: same-origin, localhost dev, semua *.vercel.app, dan CLIENT_URL
+    if (
+      !origin ||
+      origin.includes('localhost') ||
+      origin.endsWith('.vercel.app') ||
+      origin === process.env.CLIENT_URL
+    ) {
+      return callback(null, true);
+    }
+    return callback(new Error('Tidak diizinkan oleh CORS'));
+  },
   credentials: true,
 }));
 
